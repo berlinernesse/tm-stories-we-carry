@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
+import poppy from './assets/poppy.png';
 
 // Edit these questions anytime before your Toastmasters meeting.
 
@@ -75,7 +76,7 @@ function App() {
     setSeconds(0);
   }
   function resetCards() {
-    if (!window.confirm('Start fresh? This will make all 12 cards available again.')) return;
+    if (!window.confirm(`Start fresh? This will make all ${QUESTIONS.length} cards available again.`)) return;
     setCompleted([]); setCurrentId(null); setRevealed(false); setRunning(false); setSeconds(0);
   }
 
@@ -83,10 +84,14 @@ function App() {
     <main className="container">
       <header className="top">
         <div><p className="overline">REMEMBRANCE · NOVEMBER <span>✦</span></p><h1>Stories <em>we carry.</em></h1></div>
-        <Sparkle className="top-star" />
+        <img
+          src={poppy}
+          alt="Red Remembrance poppy"
+          className="top-poppy"
+        />
       </header>
         <div className="workspace">
-          <section className="story-card" aria-live="polite">
+          <section className={`story-card ${timing}`} aria-live="polite">
             <div className="card-top"><span>{active ? `CARD NO. ${pad(active.id)}` : 'A LITTLE MYSTERY'}</span><Sparkle /></div>
             <div className="card-content">
               {active && revealed ? <><span className="pill">Your Table Topic</span><h2>{active.title}</h2><p className="question">{active.prompt}</p></> : <>
